@@ -35,7 +35,7 @@ class UpdateProfileService {
     }
 
     if (password && !old_password) {
-      throw new AppError('Old password is required');
+      throw new AppError('Old password is required.');
     }
 
     if (password && old_password) {
