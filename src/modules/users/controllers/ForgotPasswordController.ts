@@ -7,7 +7,7 @@ export default class ForgotPasswordController {
 
     const sendForgotPasswordEmail = new SendForgotPasswordEmailService();
 
-    const user = await sendForgotPasswordEmail.execute({
+    await sendForgotPasswordEmail.execute({
       email,
     });
 
