@@ -2,6 +2,7 @@ import { ProductsRepository } from '../typeorm/repositories/ProductsRepository';
 import { getCustomRepository } from 'typeorm';
 import Product from '../typeorm/entities/Product';
 import AppError from '@shared/errors/AppError';
+import RedisCache from '@shared/cache/RedisCache';
 
 interface IRequest {
   id: string;
@@ -24,6 +25,10 @@ class UpdateProductService {
     if (!product) {
       throw new AppError('Product not found.');
     }
+
+    const redisCache = new RedisCache();
+
+    await redisCache.invalidade('api-vendas-PRODUCT_LIST');
 
     const productExists = await productsRepository.findByName(name);
 
