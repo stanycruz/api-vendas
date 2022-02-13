@@ -22,7 +22,7 @@ describe('CreateCustomer', () => {
   });
 
   it('should note be able to create two customers with the same email', async () => {
-    const customer = await createCustomer.execute({
+    await createCustomer.execute({
       name: 'Stany Cruz',
       email: 'test@test.com',
     });
