@@ -3,12 +3,16 @@ import 'reflect-metadata';
 import CreateCustomerService from './CreateCustomerService';
 import FakeCustomersRepository from '@modules/customers/domain/repositories/fakes/FakeCustomersRepository';
 
+let fakeCustomerRepository: FakeCustomersRepository;
+let createCustomer: CreateCustomerService;
+
 describe('CreateCustomer', () => {
+  beforeEach(() => {
+    fakeCustomerRepository = new FakeCustomersRepository();
+    createCustomer = new CreateCustomerService(fakeCustomerRepository);
+  });
+
   it('should be able to create a new customer', async () => {
-    const fakeCustomerRepository = new FakeCustomersRepository();
-
-    const createCustomer = new CreateCustomerService(fakeCustomerRepository);
-
     const customer = await createCustomer.execute({
       name: 'Stany Cruz',
       email: 'test@test.com',
@@ -18,10 +22,6 @@ describe('CreateCustomer', () => {
   });
 
   it('should note be able to create two customers with the same email', async () => {
-    const fakeCustomerRepository = new FakeCustomersRepository();
-
-    const createCustomer = new CreateCustomerService(fakeCustomerRepository);
-
     const customer = await createCustomer.execute({
       name: 'Stany Cruz',
       email: 'test@test.com',
