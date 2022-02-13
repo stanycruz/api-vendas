@@ -10,6 +10,8 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 import { container } from 'tsyringe';
 
+import '@modules/users/providers';
+
 container.registerSingleton<ICustomersRepository>(
   'CustomersRepository',
   CustomersRepository,
